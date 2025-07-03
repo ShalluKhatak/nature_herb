@@ -3,8 +3,10 @@ import { Search, Leaf, Menu, User, LogIn } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import AuthModal from "./auth/AuthModal";
-
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState("login");
@@ -25,31 +27,30 @@ const Header = () => {
     setIsAuthModalOpen(true);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsAuthModalOpen(true);
+  };
+
   return (
     <>
       <header className="bg-white/95 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <Leaf className="h-8 w-8 text-green-600" />
+              <img src="../assets/favicon-32x32.png" alt="" className="h-8 w-8 text-green-600" />
               <h1 className="text-2xl font-bold text-green-800">NatureHurb</h1>
             </div>
-            
-            <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-700 hover:text-green-600 transition-colors">Herbs</a>
-              <a href="#" className="text-gray-700 hover:text-green-600 transition-colors">Health Conditions</a>
-              <a href="#" className="text-gray-700 hover:text-green-600 transition-colors">Learn</a>
-              <a href="#" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
-            </nav>
-
+          <Navbar />
             <div className="flex items-center space-x-4">
               {isLoggedIn ? (
                 <Button
+                  onClick={() => navigate("/profile")}
                   variant="ghost"
                   size="icon"
                   className="rounded-full h-9 w-9 bg-green-50 hover:bg-green-100 text-green-700"
                 >
-                  <User className="h-4 w-4" />
+                  <User  className="h-4 w-4" />
                 </Button>
               ) : (
                 <>
@@ -75,12 +76,23 @@ const Header = () => {
                     className="md:hidden text-gray-700"
                     onClick={openLoginModal}
                   >
-                    <User className="h-5 w-5" />
+                    <User onClick={() => setIsLoggedIn(false)} className="h-5 w-5" />
                   </Button>
                 </>
               )}
               
-              <Search className="h-5 w-5 text-gray-500 cursor-pointer hover:text-green-600 transition-colors" />
+              {isLoggedIn?
+              <Button
+                    variant="outline"
+                    size="sm"
+                    className="hidden md:flex items-center gap-1.5 text-sm text-green-700 border-green-200 hover:bg-green-50"
+                    onClick={handleLogout}
+                  >
+                    <LogIn className="h-4 w-4" />
+                    <span>Logout</span>
+                  </Button>
+              :<Search className="h-5 w-5 text-gray-500 cursor-pointer hover:text-green-600 transition-colors" />}
+
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="md:hidden"

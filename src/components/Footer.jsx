@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Leaf className="h-8 w-8 text-green-400" />
+              <img src="../assets/favicon-32x32.png" alt="" className="h-8 w-8 text-green-600" />
               <h3 className="text-2xl font-bold">NatureHurb</h3>
             </div>
             <p className="text-green-200 mb-6 max-w-md">

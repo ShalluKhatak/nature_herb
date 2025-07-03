@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
@@ -15,6 +15,9 @@ const AuthModal = ({ open, onOpenChange, defaultTab = "login" }) => {
           <DialogTitle className="text-center text-2xl font-bold text-green-800">
             Welcome to NatureHurb
           </DialogTitle>
+          <DialogDescription className="text-center text-gray-500">
+            Please sign in or create an account to continue.
+          </DialogDescription>
         </DialogHeader>
         
         <Tabs 
